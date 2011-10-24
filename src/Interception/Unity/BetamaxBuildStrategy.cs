@@ -1,31 +1,38 @@
-﻿using Microsoft.Practices.ObjectBuilder2;
-using Microsoft.Practices.Unity;
+﻿using System.Diagnostics;
+using Microsoft.Practices.ObjectBuilder2;
 
 namespace mmSquare.Betamax.Unity
 {
 
-	// Courtesy of this great answer http://stackoverflow.com/questions/1380375/custom-object-factory-extension-for-unity
-
 	public class BetamaxBuildStrategy : BuilderStrategy
 	{
 
-		public override void PostBuildUp(IBuilderContext context)
+		public override void PreBuildUp(IBuilderContext context)
 		{
-			// System.Console.WriteLine("PostBuildUp!");
+			var key = context.OriginalBuildKey;
 
-			if (context.Existing != null)
+			if (!key.Type.IsInterface)
 			{
-				System.Console.WriteLine("Instantiated " + context.Existing.GetType().FullName);
-				System.Console.WriteLine("ResolvedFrom " + context.OriginalBuildKey.Type.FullName);
-
-				var resplacement = new RecordingImplementation().CreateRecordingImplementation(context.OriginalBuildKey.Type,
-				                                                                               context.Existing);
-
-				System.Console.WriteLine("ReplacedWith " +  resplacement.GetType().FullName);
-
-				context.Existing = resplacement;
-
+				// We only record for interfaces
+				// TODO: Configure explicitly what to record
+				return;
 			}
+
+			var existing = context.Existing;
+
+			if (existing == null)
+			{
+				return;
+			}
+
+			Debug.WriteLine("Instantiated " + existing.GetType().FullName);
+			Debug.WriteLine("ResolvedFrom " + key.Type.FullName);
+
+			var replacement = new RecordingImplementation().CreateRecordingImplementation(context.OriginalBuildKey.Type,context.Existing);
+
+			Debug.WriteLine("ReplacedWith " + replacement.GetType().FullName);
+
+			context.Existing = replacement;
 		}
 	}
 }

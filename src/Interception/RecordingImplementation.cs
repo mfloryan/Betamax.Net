@@ -26,7 +26,6 @@ namespace mmSquare.Betamax
 				_tape = tape;
 			}
 
-
 			public void Intercept(IInvocation invocation)
 			{
 				if (invocation.Arguments != null && invocation.Arguments.Length > 0)

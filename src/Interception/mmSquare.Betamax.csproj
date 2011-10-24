@@ -57,10 +57,8 @@
     <Compile Include="FileTape.cs" />
     <Compile Include="RecordingImplementation.cs" />
     <Compile Include="Tape.cs" />
-    <Compile Include="Unity\CustomFactory.cs" />
-    <Compile Include="Unity\CustomFactoryBuildStrategy.cs" />
+    <Compile Include="Unity\BetamaxBuildStrategy.cs" />
     <Compile Include="Unity\BetamaxUnityExtension.cs" />
-    <Compile Include="Unity\ParentMarkerPolicy.cs" />
     <Compile Include="Utilities\PackValue.cs" />
     <Compile Include="PlaybackImplementation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -9,19 +9,20 @@ namespace Unity.Integration.Tests
 	public class UnityTests
 	{
 		[Test]
-		public void ShouldInterceptResolutionAndDecorateWithRecordingThingy()
+		public void ShouldInterceptResolutionAndDecorateWithRecordingProxy()
 		{
-			var container = new UnityContainer().LoadConfiguration("Container1");
-			System.Console.WriteLine("Before resolution");
+			var container = new UnityContainer().LoadConfiguration("ContainerWithBetamax");
 			var service = container.Resolve<WidgetService>();
-			System.Console.WriteLine("After resolution");
-			service.GetWidgetName();
+			Assert.That(service.GetType().FullName, Is.EqualTo("Castle.Proxies.WidgetServiceProxy"));
+		}
 
-			var service2 = container.Resolve<WidgetService>();
-			service2.GetWidgetNameFor(new WidgetNameForRequest()
-			                          	{
-			                          		VersionNumber = "2"
-			                          	});
+		[Test]
+		public void ShouldResolveImplemntingTypeWithouthExtension()
+		{
+			var container = new UnityContainer().LoadConfiguration("ContainerNoExtension");
+			var service = container.Resolve<WidgetService>();
+			Assert.That(service.GetType().FullName, Is.EqualTo("SampleInterfaceImplementation.WcfWidgetService"));
+			
 		}
 	}
 }
