@@ -48,9 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PlaybackCallHandlerTests.cs" />
+    <Compile Include="PlaybackImplementationTests.cs" />
     <Compile Include="RecordingCallHandlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecordingImplementationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

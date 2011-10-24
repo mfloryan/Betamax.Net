@@ -18,14 +18,14 @@ namespace mmSquare.Betamax
 		private const string ResponseFileTypeName = @"response";
 		private const string RequestFileTypeName = @"request";
 
-		public void RecordResponse(object returnValue, Type reflectedType, string methodName)
+		public void RecordResponse(object returnValue, Type recordedType, string methodName)
 		{
-			RecordObject(returnValue , ResponseFileTypeName, reflectedType, methodName);
+			RecordObject(returnValue , ResponseFileTypeName, recordedType, methodName);
 		}
 
-		public void RecordRequest(object arguments, Type reflectedType, string methodName)
+		public void RecordRequest(object arguments, Type recordedType, string methodName)
 		{
-			RecordObject(arguments, RequestFileTypeName, reflectedType, methodName);
+			RecordObject(arguments, RequestFileTypeName, recordedType, methodName);
 		}
 
 		private void RecordObject(object arguments, string fileTypeName, Type reflectedType, string methodName)
@@ -33,7 +33,7 @@ namespace mmSquare.Betamax
 			var stamp = (long) (DateTime.UtcNow - new DateTime(2010, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalMilliseconds;
 			//var nonce = Convert.ToBase64String(BitConverter.GetBytes(stamp));
 			var nonce = String.Format("{0:x16}", stamp);
-			var path = GetPath(reflectedType, methodName);
+			var path = GetPath(reflectedType, methodName, true);
 			SerialiseObject(path, arguments, String.Format("{0}-{1}.xml", nonce, fileTypeName));
 		}
 
@@ -58,20 +58,20 @@ namespace mmSquare.Betamax
 			}
 		}
 
-		private string GetPath(Type reflectedType, string methodName)
+		private string GetPath(Type reflectedType, string methodName, bool forceCrate)
 		{
 			var directory = new DirectoryInfo(Path.Combine(TapeRootPath, Path.Combine(reflectedType.ToString(), methodName)));
 
-			if (!directory.Exists)
+			if (forceCrate && !directory.Exists)
 			{
 				directory.Create();
 			}
 			return directory.FullName;
 		}
 
-		public object Load(Type returnType, string methodName)
+		public object Playback(Type recordedType, string methodName)
 		{
-			var path = GetPath(returnType, methodName);
+			var path = GetPath(recordedType, methodName, false);
 			var di = new DirectoryInfo(path);
 
 			if (!di.Exists)

@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileTape.cs" />
+    <Compile Include="RecordingImplementation.cs" />
     <Compile Include="Tape.cs" />
     <Compile Include="Utilities\PackValue.cs" />
     <Compile Include="PlaybackImplementation.cs" />

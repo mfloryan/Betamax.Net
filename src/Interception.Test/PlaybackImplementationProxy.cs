@@ -17,6 +17,5 @@ namespace mmSquare.Betamax.Interception.Tests
 
 			impl.AskAndAnswer("Question");
 		}
-
 	}
 }

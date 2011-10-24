@@ -8,7 +8,7 @@ namespace Integration.Tests
 {
 	
 	[TestFixture]
-	public class PlaybackCallHandlerTests
+	public class PlaybackImplementationTests
 	{
 
 		class ProxyFactory
