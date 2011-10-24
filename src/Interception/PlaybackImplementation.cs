@@ -4,10 +4,16 @@ namespace mmSquare.Betamax
 {
 	public class PlaybackImplementation
 	{
+		private readonly ProxyGenerator _generator;
+
+		public PlaybackImplementation()
+		{
+			_generator = new ProxyGenerator();
+		}
+
 		public T CreatePlaybackImplementation<T>() where T: class 
 		{
-			var generator = new ProxyGenerator();
-			return generator.CreateInterfaceProxyWithoutTarget<T>(new MethodInterceptor(new FileTape()));
+			return _generator.CreateInterfaceProxyWithoutTarget<T>(new MethodInterceptor(new FileTape()));
 		}
 
 		internal class MethodInterceptor : IInterceptor

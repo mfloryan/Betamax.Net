@@ -1,16 +1,15 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("mmSquare.Betamax.Unity")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Betamax - Unity")]
+[assembly: AssemblyDescription("A Record/Playback interface decorator - Unity extensions")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("BMS")]
-[assembly: AssemblyProduct("mmSquare.Betamax.Unity")]
-[assembly: AssemblyCopyright("Copyright © BMS 2011")]
+[assembly: AssemblyCompany("mmSqaure")]
+[assembly: AssemblyProduct("mmSquare.Betamax")]
+[assembly: AssemblyCopyright("Copyright © mmSquare 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

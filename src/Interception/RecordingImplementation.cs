@@ -5,19 +5,24 @@ namespace mmSquare.Betamax
 {
 	public class RecordingImplementation
 	{
-		public TInterface CreateRecordingImplementation<TInterface, TImpl>(TImpl target) where TImpl: TInterface 
+		private readonly ProxyGenerator _generator;
+
+		public RecordingImplementation()
 		{
-			var generator = new ProxyGenerator();
-			return (TInterface) generator.CreateInterfaceProxyWithTarget(typeof (TInterface), target, new MethodInterceptor(new FileTape()));
+			_generator = new ProxyGenerator();
+		}
+
+		public TInterface CreateRecordingImplementation<TInterface, TImpl>(TImpl target) where TImpl: TInterface
+		{
+			return (TInterface) CreateRecordingImplementation(typeof (TInterface), target);
 		}
 
 		public object CreateRecordingImplementation(Type Interface, object implementation)
 		{
-			var generator = new ProxyGenerator();
-			return generator.CreateInterfaceProxyWithTarget(Interface, implementation, new MethodInterceptor(new FileTape()));
+			return _generator.CreateInterfaceProxyWithTarget(Interface, implementation, new MethodInterceptor(new FileTape()));
 		} 
 
-		public class MethodInterceptor : IInterceptor
+		private class MethodInterceptor : IInterceptor
 		{
 			private readonly Tape _tape;
 
