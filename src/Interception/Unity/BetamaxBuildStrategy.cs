@@ -6,16 +6,8 @@ namespace mmSquare.Betamax.Unity
 
 	// Courtesy of this great answer http://stackoverflow.com/questions/1380375/custom-object-factory-extension-for-unity
 
-	public class CustomFactoryBuildStrategy : BuilderStrategy
+	public class BetamaxBuildStrategy : BuilderStrategy
 	{
-		private ExtensionContext baseContext;
-		//private CustomFactory factory;
-
-		public CustomFactoryBuildStrategy(ExtensionContext baseContext)
-		{
-			//this.factory = factory;
-			this.baseContext = baseContext;
-		}
 
 		public override void PostBuildUp(IBuilderContext context)
 		{
