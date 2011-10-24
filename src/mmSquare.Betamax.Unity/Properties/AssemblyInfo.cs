@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Betamax")]
-[assembly: AssemblyDescription("A Record/Playback interface decorator")]
+[assembly: AssemblyTitle("mmSquare.Betamax.Unity")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("mmSqaure")]
-[assembly: AssemblyProduct("mmSquare.Betamax")]
-[assembly: AssemblyCopyright("Copyright © mmSquare 2011")]
+[assembly: AssemblyCompany("BMS")]
+[assembly: AssemblyProduct("mmSquare.Betamax.Unity")]
+[assembly: AssemblyCopyright("Copyright © BMS 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("518afce4-84ca-42c4-a5dc-2ce163837525")]
+[assembly: Guid("fde3b18d-d8b2-47d8-ab4c-31cd45a785cf")]
 
 // Version information for an assembly consists of the following four values:
 //
