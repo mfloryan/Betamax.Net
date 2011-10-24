@@ -1,4 +1,5 @@
-﻿using Castle.DynamicProxy;
+﻿using System;
+using Castle.DynamicProxy;
 
 namespace mmSquare.Betamax
 {
@@ -9,6 +10,12 @@ namespace mmSquare.Betamax
 			var generator = new ProxyGenerator();
 			return (TInterface) generator.CreateInterfaceProxyWithTarget(typeof (TInterface), target, new MethodInterceptor(new FileTape()));
 		}
+
+		public object CreateRecordingImplementation(Type Interface, object implementation)
+		{
+			var generator = new ProxyGenerator();
+			return generator.CreateInterfaceProxyWithTarget(Interface, implementation, new MethodInterceptor(new FileTape()));
+		} 
 
 		public class MethodInterceptor : IInterceptor
 		{
