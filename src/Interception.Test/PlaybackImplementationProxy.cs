@@ -10,8 +10,8 @@ namespace mmSquare.Betamax.Interception.Tests
 		[Test]
 		public void CanInstantiateProxyFromInterface()
 		{
-			var pi = new PlaybackImplementation();
-			var impl = pi.CreatePlaybackImplementation<TestInterface>();
+			var pi = new Player();
+			var impl = pi.Start<TestInterface>();
 
 			Assert.That(impl, Is.Not.Null);
 

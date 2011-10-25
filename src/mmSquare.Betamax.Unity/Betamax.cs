@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.ObjectBuilder;
 
@@ -9,14 +11,26 @@ namespace mmSquare.Betamax.Unity
 	// http://www.beefycode.com/post/Decorator-Unity-Container-Extension.aspx
 	// http://www.pnpguidance.net/post/GenericDecoratorChainsExampleUnityDependencyInjectionContainer.aspx
 
-	public class BetamaxUnityExtension : UnityContainerExtension
+	public class Betamax : UnityContainerExtension
 	{
 		private BetamaxBuildStrategy _strategy;
 
+		private readonly List<string> _interestingTypes = new List<string>();
+
 		protected override void Initialize()
 		{
-			_strategy = new BetamaxBuildStrategy();
+			_strategy = new BetamaxBuildStrategy(_interestingTypes);
 			Context.Strategies.Add(_strategy, UnityBuildStage.PostInitialization);
+		}
+
+		public Betamax AddInterestingType(string typeName)
+		{
+			if (string.IsNullOrEmpty(typeName))
+				throw new ArgumentNullException("typeName");
+
+			_interestingTypes.Add(typeName);
+
+			return this;
 		}
 	}
 }

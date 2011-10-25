@@ -1,11 +1,25 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using Microsoft.Practices.ObjectBuilder2;
 
 namespace mmSquare.Betamax.Unity
 {
-
 	public class BetamaxBuildStrategy : BuilderStrategy
 	{
+		private readonly IEnumerable<string> _interestingTypes;
+
+		private Recorder _recorder;
+
+		public BetamaxBuildStrategy(IEnumerable<string> interestingTypes)
+		{
+			_interestingTypes = interestingTypes;
+			_recorder = new Recorder();
+		}
+
+		public BetamaxBuildStrategy(): this(new List<string>())
+		{
+		}
 
 		public override void PreBuildUp(IBuilderContext context)
 		{
@@ -14,7 +28,6 @@ namespace mmSquare.Betamax.Unity
 			if (!key.Type.IsInterface)
 			{
 				// We only record for interfaces
-				// TODO: Configure explicitly what to record
 				return;
 			}
 
@@ -25,10 +38,18 @@ namespace mmSquare.Betamax.Unity
 				return;
 			}
 
+			if (_interestingTypes != null && _interestingTypes.Count() > 0)
+			{
+				if (!_interestingTypes.Contains(key.Type.FullName))
+				{
+					return;
+				}
+			}
+
 			Debug.WriteLine("Instantiated " + existing.GetType().FullName);
 			Debug.WriteLine("ResolvedFrom " + key.Type.FullName);
 
-			var replacement = new RecordingImplementation().CreateRecordingImplementation(context.OriginalBuildKey.Type,context.Existing);
+			var replacement = _recorder.Start(context.OriginalBuildKey.Type,context.Existing);
 
 			Debug.WriteLine("ReplacedWith " + replacement.GetType().FullName);
 

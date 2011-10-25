@@ -13,7 +13,7 @@ namespace mmSquare.Betamax.Integration.Tests
 		public void ShouldRecordMethodCallsTransparently()
 		{
 			var service = new WcfWidgetService();
-			var recordingImplementation = new RecordingImplementation().CreateRecordingImplementation<WidgetService, WcfWidgetService>(service);
+			var recordingImplementation = new Recorder().Start<WidgetService, WcfWidgetService>(service);
 			var request = new WidgetNameForRequest
 			              	{
 			                               		VersionNumber = "1"

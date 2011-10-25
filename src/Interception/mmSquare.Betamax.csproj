@@ -45,10 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileTape.cs" />
-    <Compile Include="RecordingImplementation.cs" />
+    <Compile Include="Recorder.cs" />
     <Compile Include="Tape.cs" />
     <Compile Include="Utilities\PackValue.cs" />
-    <Compile Include="PlaybackImplementation.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,18 +2,25 @@
 
 namespace mmSquare.Betamax
 {
-	public class PlaybackImplementation
+	public class Player
 	{
+		private readonly Tape _tape;
+
 		private readonly ProxyGenerator _generator;
 
-		public PlaybackImplementation()
+		public Player() : this(new FileTape())
 		{
+		}
+
+		public Player(Tape tape)
+		{
+			_tape = tape;
 			_generator = new ProxyGenerator();
 		}
 
-		public T CreatePlaybackImplementation<T>() where T: class 
+		public T Start<T>() where T: class 
 		{
-			return _generator.CreateInterfaceProxyWithoutTarget<T>(new MethodInterceptor(new FileTape()));
+			return _generator.CreateInterfaceProxyWithoutTarget<T>(new MethodInterceptor(_tape));
 		}
 
 		internal class MethodInterceptor : IInterceptor
