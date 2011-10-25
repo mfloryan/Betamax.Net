@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -20,12 +21,12 @@ namespace mmSquare.Betamax
 
 		public void RecordResponse(object returnValue, Type recordedType, string methodName)
 		{
-			RecordResponse(returnValue,recordedType, methodName, GetToken());
+			RecordResponse(returnValue, recordedType, methodName, GetToken());
 		}
 
 		public void RecordResponse(object returnValue, Type recordedType, string methodName, TapeToken token)
 		{
-			RecordObject(returnValue, recordedType, methodName, RequestFileTypeName, token.Value);
+			RecordObject(returnValue, recordedType, methodName, ResponseFileTypeName, token.Value);
 		}
 
 		public void RecordRequest(object arguments, Type recordedType, string methodName)
@@ -48,7 +49,7 @@ namespace mmSquare.Betamax
 		{
 			string tapeLocation = Path.Combine(path, fileName);
 
-			Console.WriteLine("Writing to tape at: " + tapeLocation);
+			Debug.WriteLine("Writing to tape at: " + tapeLocation);
 
 			using (Stream stream = new FileStream(tapeLocation, FileMode.Create, FileAccess.Write))
 			{
