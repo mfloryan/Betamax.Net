@@ -14,7 +14,7 @@ namespace Unity.Integration.Tests
 		public void Should_Record_All_Types_If_None_Explicitly_Declared()
 		{
 			var container = new UnityContainer();
-			container.AddNewExtension<Betamax>();
+			container.AddNewExtension<BetamaxRecorder>();
 			
 			container.RegisterType<WidgetService, WcfWidgetService>();
 			container.RegisterType<SimpleWidgetService, DummyWidgetService>();
@@ -27,8 +27,8 @@ namespace Unity.Integration.Tests
 		public void Should_Record_Only_Explicitly_Declared_Types()
 		{
 			var container = new UnityContainer();
-			container.AddNewExtension<Betamax>();
-			container.Configure<Betamax>().AddInterestingType("SampleInterface.SimpleWidgetService");
+			container.AddNewExtension<BetamaxRecorder>();
+			container.Configure<BetamaxRecorder>().Settings.InterestingTypes.Add("SampleInterface.SimpleWidgetService");
 
 			container.RegisterType<WidgetService, WcfWidgetService>();
 			container.RegisterType<SimpleWidgetService, DummyWidgetService>();

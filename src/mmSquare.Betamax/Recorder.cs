@@ -19,12 +19,12 @@ namespace mmSquare.Betamax
 			_tape = tape;
 		}
 
-		public TInterface Start<TInterface, TImpl>(TImpl target) where TImpl: TInterface
+		public TInterface Record<TInterface, TImpl>(TImpl target) where TImpl: TInterface
 		{
-			return (TInterface) Start(typeof (TInterface), target);
+			return (TInterface) Record(typeof (TInterface), target);
 		}
 
-		public object Start(Type Interface, object implementation)
+		public object Record(Type Interface, object implementation)
 		{
 			return _generator.CreateInterfaceProxyWithTarget(Interface, implementation, new MethodInterceptor(_tape));
 		} 

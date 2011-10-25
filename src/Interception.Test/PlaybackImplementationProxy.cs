@@ -11,11 +11,11 @@ namespace mmSquare.Betamax.Interception.Tests
 		public void CanInstantiateProxyFromInterface()
 		{
 			var pi = new Player();
-			var impl = pi.Start<TestInterface>();
+			var impl = pi.Play<TestInterface>();
 
 			Assert.That(impl, Is.Not.Null);
 
-			impl.AskAndAnswer("Question");
+			//impl.AskAndAnswer("Question");
 		}
 	}
 }

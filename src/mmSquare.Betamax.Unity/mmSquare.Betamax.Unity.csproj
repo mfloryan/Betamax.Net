@@ -44,15 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BetamaxPlaybackBuilderStrategy.cs" />
+    <Compile Include="BetamaxPlayer.cs" />
     <Compile Include="BetamaxRecordingBuilderStrategy.cs" />
-    <Compile Include="Betamax.cs" />
-    <Compile Include="BetamaxMode.cs" />
+    <Compile Include="BetamaxRecorder.cs" />
+    <Compile Include="BetamaxSettings.cs" />
     <Compile Include="Configuration\BetamaxConfigurationExtension.cs" />
     <Compile Include="Configuration\BetamaxElement.cs" />
     <Compile Include="Configuration\InterestingInterfaceElement.cs" />
     <Compile Include="Configuration\InterestingInterfaceElementCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecordingCallHandler.cs" />
+    <Compile Include="TapeObservable.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\mmSquare.Betamax\mmSquare.Betamax.csproj">

@@ -39,6 +39,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -48,6 +49,7 @@
     <Compile Include="FileTape.cs" />
     <Compile Include="Recorder.cs" />
     <Compile Include="Tape.cs" />
+    <Compile Include="TapeObserver.cs" />
     <Compile Include="TapeToken.cs" />
     <Compile Include="Utilities\PackValue.cs" />
     <Compile Include="Player.cs" />

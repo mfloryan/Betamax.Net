@@ -15,7 +15,7 @@ namespace Integration.Tests
 		{
 			public WidgetService CreateWidgetServiceInstance()
 			{
-				return new Player().Start<WidgetService>();
+				return new Player().Play<WidgetService>();
 			}
 		}
 

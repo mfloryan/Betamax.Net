@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using NUnit.Framework;
+using SampleInterface;
 using SampleInterface.WcfStyle;
 using SampleInterfaceImplementation;
 
@@ -13,11 +14,11 @@ namespace mmSquare.Betamax.Integration.Tests
 		public void ShouldRecordMethodCallsTransparently()
 		{
 			var service = new WcfWidgetService();
-			var recordingImplementation = new Recorder().Start<WidgetService, WcfWidgetService>(service);
+			var recordingImplementation = new Recorder().Record<WidgetService, WcfWidgetService>(service);
 			var request = new WidgetNameForRequest
-			              	{
-			                               		VersionNumber = "1"
-			                               	};
+							{
+								VersionNumber = "1"
+							};
 
 			var response = recordingImplementation.GetWidgetNameFor(request);
 
@@ -30,7 +31,7 @@ namespace mmSquare.Betamax.Integration.Tests
 			Assert.That(requestFiles.Length, Is.EqualTo(1));
 			Assert.That(responseFiles.Length, Is.EqualTo(1));
 
-			Directory.Delete("RecordedCalls", true);
+			//Directory.Delete("RecordedCalls", true);
 		}
 	}
 }

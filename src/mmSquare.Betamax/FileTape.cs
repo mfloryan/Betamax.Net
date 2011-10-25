@@ -6,9 +6,9 @@ using System.Runtime.Serialization;
 
 namespace mmSquare.Betamax
 {
-	public class FileTape : Tape
+	public class FileTape : Tape, TapeObserver
 	{
-		private readonly string _tapeFolder;
+		private string _tapeFolder;
 
 		private readonly XmlObjectSerializer _serializer;
 
@@ -117,6 +117,11 @@ namespace mmSquare.Betamax
 	       		Value = String.Format("{0:x16}", stamp)
 	       	};
 
+		}
+
+		public void NotifyEject(string newTapeLocation)
+		{
+			_tapeFolder = newTapeLocation;
 		}
 	}
 }

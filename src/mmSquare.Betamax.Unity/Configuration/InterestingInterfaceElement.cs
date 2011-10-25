@@ -1,6 +1,5 @@
 using System.Configuration;
 using System.Xml;
-using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 
 namespace mmSquare.Betamax.Unity.Configuration
@@ -27,9 +26,9 @@ namespace mmSquare.Betamax.Unity.Configuration
 			writer.WriteAttributeString(NamePropertyName, Name);
 		}
 
-		internal void ConfigureContainer(IUnityContainer container)
+		internal void ConfigureContainer(BetamaxSettings settings)
 		{
-			container.Configure<Betamax>().AddInterestingType(Name);
+			settings.InterestingTypes.Add(Name);
 		}
 
 	}

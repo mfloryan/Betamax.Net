@@ -9,6 +9,7 @@ namespace mmSquare.Betamax.Unity.Configuration
 {
 	public class BetamaxElement : ContainerConfiguringElement
 	{
+		private const string ModePropertyName = "mode";
 
 		[ConfigurationProperty(ModePropertyName, IsRequired = false)]
 		public string Mode
@@ -23,16 +24,49 @@ namespace mmSquare.Betamax.Unity.Configuration
 			}
 		}
 
-		private const string ModePropertyName = "mode";
+		private const string TapesPropertyName = "tapes";
+
+		[ConfigurationProperty(TapesPropertyName, IsRequired = false)]
+		public string Tapes
+		{
+			get
+			{
+				return (string)base[TapesPropertyName];
+			}
+			set
+			{
+				base[TapesPropertyName] = value;
+			}
+		}
+		
 		private const string InterestingInterfacesPropertyName = "interestingInterfaces";
 
 		protected override void ConfigureContainer(IUnityContainer container)
 		{
-			if ("Playback".Equals(Mode))
+			BetamaxSettings settings = null;
+			
+			var recorder = container.Configure<BetamaxRecorder>();
+			if (recorder != null)
 			{
-				container.Configure<Betamax>().SetMode(BetamaxMode.Playback);
+				settings = recorder.Settings;
+			} else
+			{
+				var player = container.Configure<BetamaxPlayer>();
+				if (player != null)
+				{
+					settings = player.Settings;
+				}
 			}
-			InterestingInterfaces.ForEach(interesting => interesting.ConfigureContainer(container));
+
+			if (settings == null)
+				return;
+			
+			if (!string.IsNullOrEmpty(Tapes))
+			{
+				settings.TapesLocation = Tapes;
+			}
+
+			InterestingInterfaces.ForEach(interesting => interesting.ConfigureContainer(settings));
 		}
 
 		private static readonly UnknownElementHandlerMap<BetamaxElement> unknownElementHandlerMap =

@@ -1,24 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using Microsoft.Practices.ObjectBuilder2;
 
 namespace mmSquare.Betamax.Unity
 {
 	public class BetamaxRecordingBuilderStrategy : BuilderStrategy
 	{
-		private readonly IEnumerable<string> _interestingTypes;
+		private readonly BetamaxSettings _settings;
 
 		private readonly Recorder _recorder;
 
-		public BetamaxRecordingBuilderStrategy(IEnumerable<string> interestingTypes)
+		public BetamaxRecordingBuilderStrategy(BetamaxSettings settings)
 		{
-			_interestingTypes = interestingTypes;
-			_recorder = new Recorder();
-		}
-
-		public BetamaxRecordingBuilderStrategy(): this(new List<string>())
-		{
+			_settings = settings;
+			var tape = new FileTape();
+			settings.RegisterObserver(tape);
+			_recorder = new Recorder(tape);
 		}
 
 		public override void PreBuildUp(IBuilderContext context)
@@ -38,9 +34,9 @@ namespace mmSquare.Betamax.Unity
 				return;
 			}
 
-			if (_interestingTypes != null && _interestingTypes.Count() > 0)
+			if (_settings.InterestingTypes.Count > 0)
 			{
-				if (!_interestingTypes.Contains(key.Type.FullName))
+				if (!_settings.InterestingTypes.Contains(key.Type.FullName))
 				{
 					return;
 				}
@@ -49,7 +45,7 @@ namespace mmSquare.Betamax.Unity
 			Debug.WriteLine("Instantiated " + existing.GetType().FullName);
 			Debug.WriteLine("ResolvedFrom " + key.Type.FullName);
 
-			var replacement = _recorder.Start(context.OriginalBuildKey.Type,context.Existing);
+			var replacement = _recorder.Record(context.OriginalBuildKey.Type,context.Existing);
 
 			Debug.WriteLine("ReplacedWith " + replacement.GetType().FullName);
 

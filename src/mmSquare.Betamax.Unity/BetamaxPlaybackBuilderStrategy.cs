@@ -8,12 +8,14 @@ namespace mmSquare.Betamax.Unity
 	{
 		private readonly IEnumerable<string> _interestingTypes;
 
-		private Player _player;
+		private readonly Player _player;
 
-		public BetamaxPlaybackBuilderStrategy(IEnumerable<string> interestingTypes)
+		public BetamaxPlaybackBuilderStrategy(BetamaxSettings settings)
 		{
-			_interestingTypes = interestingTypes;
-			_player = new Player();
+			_interestingTypes = settings.InterestingTypes;
+			var tape = new FileTape();
+			settings.RegisterObserver(tape);
+			_player = new Player(tape);
 		}
 
 		public override void PreBuildUp(IBuilderContext context)
@@ -36,7 +38,7 @@ namespace mmSquare.Betamax.Unity
 				return;
 			}
 
-			var replacement = _player.Start(key.Type);
+			var replacement = _player.Play(key.Type);
 			context.Existing = replacement;
 			context.BuildComplete = true;
 		}

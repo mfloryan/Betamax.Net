@@ -19,12 +19,12 @@ namespace mmSquare.Betamax
 			_generator = new ProxyGenerator();
 		}
 
-		public T Start<T>() where T: class 
+		public T Play<T>() where T: class 
 		{
 			return _generator.CreateInterfaceProxyWithoutTarget<T>(new MethodInterceptor(_tape));
 		}
 
-		public object Start(Type t)
+		public object Play(Type t)
 		{
 			return _generator.CreateInterfaceProxyWithoutTarget(t, new MethodInterceptor(_tape));
 		}
