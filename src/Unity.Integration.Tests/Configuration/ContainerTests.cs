@@ -17,12 +17,12 @@ namespace Unity.Integration.Tests
 		}
 
 		[Test]
-		public void ShouldResolveImplemntingTypeWithouthExtension()
+		public void ShouldResolveImplementingTypeWithouthExtension()
 		{
 			var container = new UnityContainer().LoadConfiguration("ContainerNoExtension");
 			var service = container.Resolve<WidgetService>();
 			Assert.That(service.GetType().FullName, Is.EqualTo("SampleInterfaceImplementation.WcfWidgetService"));
-			
 		}
+
 	}
 }

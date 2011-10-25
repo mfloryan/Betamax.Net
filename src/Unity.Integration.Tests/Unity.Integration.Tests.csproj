@@ -60,9 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="Configuration\ConfigurationFiles\ConfigurationExtensionTest.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\mmSquare.Betamax\mmSquare.Betamax.csproj">

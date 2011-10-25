@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.ObjectBuilder;
 
@@ -13,14 +14,38 @@ namespace mmSquare.Betamax.Unity
 
 	public class Betamax : UnityContainerExtension
 	{
-		private BetamaxBuildStrategy _strategy;
+		private BuilderStrategy _strategy;
 
 		private readonly List<string> _interestingTypes = new List<string>();
 
+		private BetamaxMode _mode = BetamaxMode.Record;
+
+		public BetamaxMode Mode
+		{
+			get
+			{
+				return _mode;
+			}
+			set
+			{
+				_mode = value;
+			}
+		}
+
 		protected override void Initialize()
 		{
-			_strategy = new BetamaxBuildStrategy(_interestingTypes);
-			Context.Strategies.Add(_strategy, UnityBuildStage.PostInitialization);
+			if (Mode == BetamaxMode.Record)
+			{
+				_strategy = new BetamaxRecordingBuilderStrategy(_interestingTypes);
+				Context.Strategies.Add(_strategy, UnityBuildStage.PostInitialization);
+			} 
+
+			if (Mode == BetamaxMode.Playback)
+			{
+				_strategy = new BetamaxPlaybackBuilderStrategy(_interestingTypes);
+				Context.Strategies.Add(_strategy, UnityBuildStage.PreCreation);
+			}
+
 		}
 
 		public Betamax AddInterestingType(string typeName)

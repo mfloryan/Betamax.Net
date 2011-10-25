@@ -8,11 +8,23 @@ namespace mmSquare.Betamax
 {
 	public class FileTape : Tape
 	{
-		private readonly NetDataContractSerializer _serializer;
+		private readonly string _tapeFolder;
 
-		public FileTape()
+		private readonly XmlObjectSerializer _serializer;
+
+		public FileTape() : this(TapeRootPath)
 		{
-			_serializer = new NetDataContractSerializer();
+
+		}
+
+		public FileTape(string tapeFolder)
+		{
+			if (string.IsNullOrEmpty(tapeFolder))
+				throw new ArgumentNullException("tapeFolder");
+
+			_tapeFolder = tapeFolder;
+
+			_serializer = new NetDataContractSerializer();	
 		}
 
 		private const string TapeRootPath = @"RecordedCalls";
@@ -53,7 +65,7 @@ namespace mmSquare.Betamax
 
 			using (Stream stream = new FileStream(tapeLocation, FileMode.Create, FileAccess.Write))
 			{
-				_serializer.Serialize(stream, @object);
+				_serializer.WriteObject(stream, @object);
 				stream.Close();
 			}
 		}
@@ -62,13 +74,13 @@ namespace mmSquare.Betamax
 		{
 			using (openRead)
 			{
-				return _serializer.Deserialize(openRead);
+				return _serializer.ReadObject(openRead);
 			}
 		}
 
 		private string GetPath(Type reflectedType, string methodName, bool forceCrate)
 		{
-			var directory = new DirectoryInfo(Path.Combine(TapeRootPath, Path.Combine(reflectedType.ToString(), methodName)));
+			var directory = new DirectoryInfo(Path.Combine(_tapeFolder, Path.Combine(reflectedType.ToString(), methodName)));
 
 			if (forceCrate && !directory.Exists)
 			{

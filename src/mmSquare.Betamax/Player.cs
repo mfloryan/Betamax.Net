@@ -1,4 +1,5 @@
-﻿using Castle.DynamicProxy;
+﻿using System;
+using Castle.DynamicProxy;
 
 namespace mmSquare.Betamax
 {
@@ -22,6 +23,12 @@ namespace mmSquare.Betamax
 		{
 			return _generator.CreateInterfaceProxyWithoutTarget<T>(new MethodInterceptor(_tape));
 		}
+
+		public object Start(Type t)
+		{
+			return _generator.CreateInterfaceProxyWithoutTarget(t, new MethodInterceptor(_tape));
+		}
+
 
 		internal class MethodInterceptor : IInterceptor
 		{

@@ -5,19 +5,19 @@ using Microsoft.Practices.ObjectBuilder2;
 
 namespace mmSquare.Betamax.Unity
 {
-	public class BetamaxBuildStrategy : BuilderStrategy
+	public class BetamaxRecordingBuilderStrategy : BuilderStrategy
 	{
 		private readonly IEnumerable<string> _interestingTypes;
 
-		private Recorder _recorder;
+		private readonly Recorder _recorder;
 
-		public BetamaxBuildStrategy(IEnumerable<string> interestingTypes)
+		public BetamaxRecordingBuilderStrategy(IEnumerable<string> interestingTypes)
 		{
 			_interestingTypes = interestingTypes;
 			_recorder = new Recorder();
 		}
 
-		public BetamaxBuildStrategy(): this(new List<string>())
+		public BetamaxRecordingBuilderStrategy(): this(new List<string>())
 		{
 		}
 

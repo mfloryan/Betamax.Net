@@ -39,11 +39,14 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BetamaxBuildStrategy.cs" />
+    <Compile Include="BetamaxPlaybackBuilderStrategy.cs" />
+    <Compile Include="BetamaxRecordingBuilderStrategy.cs" />
     <Compile Include="Betamax.cs" />
+    <Compile Include="BetamaxMode.cs" />
     <Compile Include="Configuration\BetamaxConfigurationExtension.cs" />
     <Compile Include="Configuration\BetamaxElement.cs" />
     <Compile Include="Configuration\InterestingInterfaceElement.cs" />
