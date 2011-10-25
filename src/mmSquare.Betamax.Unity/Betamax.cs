@@ -26,7 +26,7 @@ namespace mmSquare.Betamax.Unity
 			{
 				return _mode;
 			}
-			set
+			private set
 			{
 				_mode = value;
 			}
@@ -45,7 +45,6 @@ namespace mmSquare.Betamax.Unity
 				_strategy = new BetamaxPlaybackBuilderStrategy(_interestingTypes);
 				Context.Strategies.Add(_strategy, UnityBuildStage.PreCreation);
 			}
-
 		}
 
 		public Betamax AddInterestingType(string typeName)
@@ -55,6 +54,12 @@ namespace mmSquare.Betamax.Unity
 
 			_interestingTypes.Add(typeName);
 
+			return this;
+		}
+
+		public Betamax SetMode(BetamaxMode mode)
+		{
+			Mode = mode;
 			return this;
 		}
 	}

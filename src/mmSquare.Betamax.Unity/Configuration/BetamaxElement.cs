@@ -30,7 +30,7 @@ namespace mmSquare.Betamax.Unity.Configuration
 		{
 			if ("Playback".Equals(Mode))
 			{
-				container.Configure<Betamax>().Mode = BetamaxMode.Playback;
+				container.Configure<Betamax>().SetMode(BetamaxMode.Playback);
 			}
 			InterestingInterfaces.ForEach(interesting => interesting.ConfigureContainer(container));
 		}
