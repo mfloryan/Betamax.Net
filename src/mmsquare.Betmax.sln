@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleInterface", "SampleIn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleInterfaceImplementation", "SampleInterfaceImplementation\SampleInterfaceImplementation.csproj", "{8E491BCD-6925-4FD7-9E69-1E01EE481DDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mmSquare.Betamax", "Interception\mmSquare.Betamax.csproj", "{9047DDBD-A4B5-49E8-84E7-C2DBA2046567}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mmSquare.Betamax", "mmSquare.Betamax\mmSquare.Betamax.csproj", "{9047DDBD-A4B5-49E8-84E7-C2DBA2046567}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mmSquare.Betamax.Interception.Tests", "Interception.Test\mmSquare.Betamax.Interception.Tests.csproj", "{5228D583-E5AA-4297-A433-8811DBBA8D88}"
 EndProject

@@ -47,6 +47,7 @@
     <Compile Include="FileTape.cs" />
     <Compile Include="Recorder.cs" />
     <Compile Include="Tape.cs" />
+    <Compile Include="TapeToken.cs" />
     <Compile Include="Utilities\PackValue.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

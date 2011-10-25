@@ -39,7 +39,6 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -53,7 +52,7 @@
     <Compile Include="RecordingCallHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Interception\mmSquare.Betamax.csproj">
+    <ProjectReference Include="..\mmSquare.Betamax\mmSquare.Betamax.csproj">
       <Project>{9047DDBD-A4B5-49E8-84E7-C2DBA2046567}</Project>
       <Name>mmSquare.Betamax</Name>
     </ProjectReference>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Castle.DynamicProxy;
 
 namespace mmSquare.Betamax
@@ -41,27 +40,27 @@ namespace mmSquare.Betamax
 
 			public void Intercept(IInvocation invocation)
 			{
-				RecordArguments(invocation);
-				invocation.Proceed();
-				RecordReturnValue(invocation);
-			}
-
-			private void RecordReturnValue(IInvocation invocation)
-			{
-				if (invocation.ReturnValue != null && invocation.ReturnValue.GetType().IsSerializable)
+				using (var token = _tape.GetToken())
 				{
-					_tape.RecordResponse(invocation.ReturnValue, invocation.Method.ReflectedType, invocation.Method.Name);
+					RecordArguments(invocation, token);
+					invocation.Proceed();
+					RecordReturnValue(invocation, token);
 				}
 			}
 
-			private void RecordArguments(IInvocation invocation)
+			private void RecordReturnValue(IInvocation invocation, TapeToken token)
+			{
+				if (invocation.ReturnValue != null)
+				{
+					_tape.RecordResponse(invocation.ReturnValue, invocation.Method.ReflectedType, invocation.Method.Name, token);
+				}
+			}
+
+			private void RecordArguments(IInvocation invocation, TapeToken token)
 			{
 				if (invocation.Arguments != null && invocation.Arguments.Length > 0)
 				{
-					if (!invocation.Arguments.All(a => a.GetType().IsSerializable))
-					{
-						_tape.RecordRequest(invocation.Arguments, invocation.Method.ReflectedType, invocation.Method.Name);
-					}
+					_tape.RecordRequest(invocation.Arguments, invocation.Method.ReflectedType, invocation.Method.Name, token);
 				}
 			}
 		}
