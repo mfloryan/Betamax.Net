@@ -12,3 +12,7 @@ The name was inspired by the [Betamax][1] project by [Rob Fletcher][2]
 [1]:http://robfletcher.github.com/betamax/
 [2]:http://robfletcher.github.com
 [3]:http://unity.codeplex.com/
+
+## License
+
+The source code is licensed under the MIT license
